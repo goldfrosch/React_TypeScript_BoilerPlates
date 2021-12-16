@@ -1,44 +1,64 @@
-//웹팩 튜토리얼: https://webpack.js.org/configuration/mode/
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin'); 
+require("dotenv").config();
+
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+const isProd = process.env.NODE_ENV === "production"; 
+const PORT = process.env.PORT || 3000;
 
 module.exports = {
-  entry: {
-    'js/app': ['./src/App.tsx'],
-  },
-
+  mode: isProd ? "production" : "development",
+  devtool: isProd ? "hidden-source-map" : "source-map",
+  entry: "./src/index.tsx",
   output: {
-    path: path.resolve(__dirname, 'dist/'),
-    publicPath: '/',
+    filename: "[name].js",
+    path: path.join(__dirname, "/dist"),
   },
-
-  devServer: {
-    port: 3000,
+  resolve: {
+    modules: ["node_modules"],
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
-
   module: {
     rules: [
       {
         test: /\.(ts|tsx)$/,
-        use: ['babel-loader',
-          {
-            loader: 'ts-loader',
-            options: {
-              transpileOnly: true,
-            },
-          },
-        ],
-        exclude: /node_modules/,
+        loader: "ts-loader",
+        options: {
+          transpileOnly: isProd ? false : true,
+        },
+      },
+      {
+        test: /\.css?$/,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.(webp|jpg|png|jpeg)$/,
+        loader: "file-loader",
+        options: {
+          name: "[name].[ext]?[hash]",
+        },
       },
     ],
   },
-  
   plugins: [
     new HtmlWebpackPlugin({
-      template: './public/index.html',
-      filename: 'index.html',
+      template: path.resolve(__dirname, "public", "index.html"),
+      hash: true,
     }),
-    new ForkTsCheckerWebpackPlugin(),
   ],
+  stats: "errors-only",
+  devServer: {
+    static: {
+      directory: path.resolve(__dirname, "public"),
+    },
+    port: PORT,
+    open: true,
+    client: {
+      overlay: true,
+    },
+    hot: true,
+    host: "localhost",
+    historyApiFallback: true,
+    compress: true,
+  },
 };
