@@ -4,7 +4,7 @@
   "main": "index.js",
   "repository": "https://github.com/goldfrosch/React_TypeScript_BoilerPlates.git",
   "author": "goldfrosch <goldfrosch@daum.net>",
-  "license": "MIT",
+  "license": "ISC",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack serve --open --hot --progress",
     "build": "cross-env NODE_ENV=production webpack --progress"
