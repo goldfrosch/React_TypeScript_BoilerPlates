@@ -16,7 +16,9 @@ module.exports = {
   },
   resolve: {
     modules: ["node_modules"],
+    //import시 파일 확장명 작성 안해도 됨
     extensions: [".js", ".jsx", ".ts", ".tsx"],
+    preferRelative: true,
   },
   module: {
     rules: [
