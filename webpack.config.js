@@ -40,6 +40,11 @@ module.exports = {
           name: "[name].[ext]?[hash]",
         },
       },
+      {
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        use: ['babel-loader', 'eslint-loader']
+      },
     ],
   },
   plugins: [
