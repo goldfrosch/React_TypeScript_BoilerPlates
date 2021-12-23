@@ -2,8 +2,8 @@
 
 직접 만든 타입스크립트 BoilerPlates
 
-다운로드 방법: yarn add create-gold-app -g 로 사용 패키지 다운로드
-이후 yarn create gold-app [프로젝트명]으로 작동
+###다운로드 방법: npm install -g create-gold-app 로 사용 패키지 다운로드
+###이후 yarn create gold-app [프로젝트명]으로 작동
 
 Version Info
 
