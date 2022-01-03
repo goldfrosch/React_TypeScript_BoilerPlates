@@ -1,5 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
+import "../font/font.css";
+
 const GlobalStyle = createGlobalStyle`
     body {
         box-sizing: border-box;
@@ -18,7 +20,12 @@ const GlobalStyle = createGlobalStyle`
             }
         }
     }
+    button {
+        border: 0;
+        outline: 0;
+    }
     * {
+        font-family: "A14";
         box-sizing: inherit;
         margin: 0;
         padding: 0; 

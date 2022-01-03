@@ -3,6 +3,9 @@ require("dotenv").config();
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+//빌드 시 CSS를 별도로 추출해 HTML DOM 추출 과정에서 JS를 불러오는 과정을 최소화 시켜주는 효과가 있다 칸다
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 const isProd = process.env.NODE_ENV === "production";
 const PORT = process.env.PORT || 3000;
 
@@ -12,7 +15,7 @@ module.exports = {
   entry: "./src/index.tsx",
   output: {
     filename: "[name].js",
-    path: path.join(__dirname, "/dist")
+    path: path.join(__dirname, "/build")
   },
   resolve: {
     modules: ["node_modules"],
@@ -20,6 +23,15 @@ module.exports = {
     extensions: [".js", ".jsx", ".ts", ".tsx"],
     preferRelative: true
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "public", "index.html"),
+      hash: true
+    }),
+    new MiniCssExtractPlugin({
+      linkType: false, // 기본 값 'text/css'
+    })
+  ],
   module: {
     rules: [
       {
@@ -30,8 +42,8 @@ module.exports = {
         }
       },
       {
-        test: /\.css?$/,
-        use: ["style-loader", "css-loader"]
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.(webp|jpg|png|jpeg)$/,
@@ -47,12 +59,6 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, "public", "index.html"),
-      hash: true
-    })
-  ],
   stats: "errors-only",
   devServer: {
     static: {
