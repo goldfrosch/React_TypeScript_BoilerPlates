@@ -2,8 +2,6 @@
   "name": "react-typescript-boilerplates",
   "version": "1.0.0-SNAPSHOT",
   "main": "index.js",
-  "repository": "https://github.com/goldfrosch/React_TypeScript_BoilerPlates.git",
-  "author": "goldfrosch <goldfrosch@daum.net>",
   "license": "MIT",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack serve --open --hot --progress",
