@@ -26,6 +26,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "public", "index.html"),
+      favicon: 'public/icon.png',
       hash: true
     }),
     new MiniCssExtractPlugin({
@@ -46,7 +47,7 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
-        test: /\.(webp|jpg|png|jpeg)$/,
+        test: /\.(webp|png|svg|jpg|jpeg|gif|ico)$/,
         loader: "file-loader",
         options: {
           name: "[name].[ext]?[hash]"
