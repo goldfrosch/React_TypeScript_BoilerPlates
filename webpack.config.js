@@ -4,7 +4,9 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 //빌드 시 CSS를 별도로 추출해 HTML DOM 추출 과정에서 JS를 불러오는 과정을 최소화 시켜주는 효과가 있다 칸다
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 const isProd = process.env.NODE_ENV === "production";
 const PORT = process.env.PORT || 3000;
@@ -26,12 +28,13 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "public", "index.html"),
-      favicon: 'public/icon.png',
+      favicon: "public/icon.png",
       hash: true
     }),
     new MiniCssExtractPlugin({
-      linkType: false, // 기본 값 'text/css'
-    })
+      linkType: false // 기본 값 'text/css'
+    }),
+    new ReactRefreshWebpackPlugin()
   ],
   module: {
     rules: [
@@ -44,7 +47,7 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, "css-loader"]
       },
       {
         test: /\.(webp|png|svg|jpg|jpeg|gif|ico)$/,
