@@ -7,6 +7,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const isProd = process.env.NODE_ENV === "production";
 const PORT = process.env.PORT || 3000;
@@ -34,7 +35,8 @@ module.exports = {
     new MiniCssExtractPlugin({
       linkType: false // 기본 값 'text/css'
     }),
-    new ReactRefreshWebpackPlugin()
+    new ReactRefreshWebpackPlugin(),
+    new CleanWebpackPlugin()
   ],
   module: {
     rules: [
