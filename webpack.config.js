@@ -9,6 +9,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
+const ProgressPlugin = require('progress-webpack-plugin');
+
 const isProd = process.env.NODE_ENV === "production";
 const PORT = process.env.PORT || 3000;
 
@@ -36,7 +38,8 @@ module.exports = {
       linkType: false // 기본 값 'text/css'
     }),
     new ReactRefreshWebpackPlugin(),
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new ProgressPlugin(true),
   ],
   module: {
     rules: [
