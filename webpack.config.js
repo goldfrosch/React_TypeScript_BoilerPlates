@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 //빌드 시 CSS를 별도로 추출해 HTML DOM 추출 과정에서 JS를 불러오는 과정을 최소화 시켜주는 효과가 있다 칸다
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+//Hot reload를 사용하기 위함 
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -55,10 +56,10 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, "css-loader"]
       },
       {
-        test: /\.(webp|png|svg|jpg|jpeg|gif|ico)$/,
+        test: /\.(webp|png|svg|jpg|jpeg|gif|ico|TTF)$/,
         loader: "file-loader",
         options: {
-          name: "[name].[ext]?[hash]"
+          name: "assets/[name].[ext]?[hash]",
         }
       },
       {
