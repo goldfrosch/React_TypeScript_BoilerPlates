@@ -56,11 +56,23 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, "css-loader"]
       },
       {
-        test: /\.(webp|png|svg|jpg|jpeg|gif|ico|TTF)$/,
+        test: /\.(webp|png|svg|jpg|jpeg|gif|ico)$/,
         loader: "file-loader",
         options: {
-          name: "assets/[name].[ext]?[hash]",
+          name: "assets/images/[name].[ext]?[hash]",
         }
+      },
+      {
+        test: /.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+        type: "javascript/auto",
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'assets/fonts/',
+            publicPath: './src/font/list'
+          }
+        }]
       },
       {
         test: /\.(js|jsx)$/,
