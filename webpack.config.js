@@ -45,15 +45,15 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+      {
         test: /\.(ts|tsx)$/,
         loader: "ts-loader",
         options: {
           transpileOnly: isProd ? false : true
         }
-      },
-      {
-        test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader"]
       },
       {
         test: /\.(webp|png|svg|jpg|jpeg|gif|ico)$/,
@@ -63,14 +63,14 @@ module.exports = {
         }
       },
       {
-        test: /.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+        test: /.(TTF|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
         type: "javascript/auto",
         use: [{
           loader: 'file-loader',
           options: {
             name: '[name].[ext]',
             outputPath: 'assets/fonts/',
-            publicPath: './src/font/list'
+            publicPath: '../fonts/'
           }
         }]
       },
