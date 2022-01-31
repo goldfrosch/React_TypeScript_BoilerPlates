@@ -20,7 +20,7 @@ module.exports = {
   devtool: isProd ? "hidden-source-map" : "source-map",
   entry: "./src/index.tsx",
   output: {
-    filename: "[name].js",
+    filename: "static/js/[name].js",
     path: path.join(__dirname, "/build")
   },
   resolve: {
@@ -36,7 +36,8 @@ module.exports = {
       hash: true
     }),
     new MiniCssExtractPlugin({
-      linkType: false // 기본 값 'text/css'
+      linkType: false, // 기본 값 'text/css'
+      filename: "static/css/[name].css"
     }),
     new ReactRefreshWebpackPlugin(),
     new CleanWebpackPlugin(),
@@ -46,7 +47,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader']
       },
       {
         test: /\.(ts|tsx)$/,
@@ -59,7 +60,7 @@ module.exports = {
         test: /\.(webp|png|svg|jpg|jpeg|gif|ico)$/,
         loader: "file-loader",
         options: {
-          name: "assets/images/[name].[ext]?[hash]",
+          name: "static/medias/images/[name].[ext]?[hash]",
         }
       },
       {
@@ -69,7 +70,7 @@ module.exports = {
           loader: 'file-loader',
           options: {
             name: '[name].[ext]',
-            outputPath: 'assets/fonts/',
+            outputPath: 'static/medias/fonts/',
             publicPath: '../fonts/'
           }
         }]
