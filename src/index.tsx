@@ -1,33 +1,18 @@
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 
 import App from "App";
 import GlobalStyle from "styles/Global";
+import { RecoilRoot } from "recoil";
 
-import { QueryClientProvider, QueryClient } from "react-query";
-
-import createSagaMiddleware from "redux-saga";
-import { applyMiddleware, createStore } from "redux";
-import rootStore, { rootSaga } from "modules";
-import { composeWithDevTools } from "redux-devtools-extension";
-import { Provider } from "react-redux";
-
-const queryClient = new QueryClient();
-
-const sagaMiddleware = createSagaMiddleware();
-
-const store = createStore(
-  rootStore,
-  composeWithDevTools(applyMiddleware(sagaMiddleware))
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
 );
 
-sagaMiddleware.run(rootSaga);
-
-ReactDOM.render(
-  <QueryClientProvider client={queryClient}>
-    <Provider store={store}>
+root.render(
+  <>
+    <RecoilRoot>
       <GlobalStyle />
       <App />
-    </Provider>
-  </QueryClientProvider>,
-  document.getElementById("root")
+    </RecoilRoot>
+  </>
 );
